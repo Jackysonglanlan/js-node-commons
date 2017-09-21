@@ -1,6 +1,5 @@
 'use strict';
 
-// node_modules 中那么多包，其实就只需要这两个，其他都是依赖
 const tracer = require('tracer');
 const PrettyError = require('pretty-error');
 

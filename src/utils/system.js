@@ -1,8 +1,10 @@
 'use strict';
 
-const isInProdEnv = process.env.NODE_ENV.toLowerCase().includes('prod');
-const isInDevEnv = process.env.NODE_ENV.toLowerCase().includes('dev');
-const isInTestEnv = process.env.NODE_ENV.toLowerCase().includes('test');
+const env = process.env.NODE_ENV;
+
+const isInProdEnv = env && env.toLowerCase().includes('prod');
+const isInDevEnv = env && env.toLowerCase().includes('dev');
+const isInTestEnv = env && env.toLowerCase().includes('test');
 
 function doInDevEnv(logic) {
   if (isInDevEnv) {

@@ -1,0 +1,10 @@
+
+
+--full-trace
+--recursive
+--require test/setup.js
+--require co-mocha
+--reporter spec
+--ui bdd
+--check-leaks
+--timeout 5000

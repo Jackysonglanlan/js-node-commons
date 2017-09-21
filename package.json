@@ -4,7 +4,9 @@
   "description": "My common utils code for Node.js",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test-gene-from": "node test/generator/index.js",
+    "test": "mocha 'test/**/tests-*.js'",
+    "test-only": "mocha "
   },
   "author": "jackysong <jackysonglanlan@gmail.com>",
   "license": "MIT",
@@ -12,5 +14,22 @@
     "colors": "1.1.2",
     "pretty-error": "2.1.1",
     "tracer": "0.8.11"
+  },
+  "devDependencies": {
+    "nodemon": "1.12.1",
+    "chai": "3.5.0",
+    "chai-as-promised": "6.0.0",
+    "chai-deep-match": "1.0.2",
+    "chance": "1.0.6",
+    "co-mocha": "1.2.0",
+    "should": "11.2.0",
+    "sinon": "2.1.0",
+    "nunjucks": "3.0.0",
+    "mocha": "3.2.0"
+  },
+
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Jackysonglanlan/js-node-commons.git"
   }
 }

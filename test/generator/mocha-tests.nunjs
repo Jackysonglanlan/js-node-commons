@@ -1,0 +1,46 @@
+{% set className = classFilePath | class_name %}
+'use strict';
+
+// run test:
+// npm run test-only -- test/{{ classFilePath | test_file_name }}
+
+const {{ className }} = js_require('{{classFilePath}}');
+
+describe('{{ className }} - {{ classFilePath }}: ', function() {
+
+  let sandbox;
+
+  before(function() {
+    // TODO
+  });
+
+  beforeEach(function() {
+
+    sandbox = sinon.sandbox.create({
+      injectInto: null,
+      properties: ['spy', 'stub', 'mock', 'clock', 'server', 'requests'],
+      useFakeTimers: false,
+      useFakeServer: false
+    });
+  });
+
+{% for method in methodList %}
+  describe('{{ method }}', function() {
+    it('should TODO', function() {
+      // TODO
+    });
+
+
+  });
+{% endfor %}
+
+  afterEach(function() {
+
+    sandbox.restore();
+  });
+
+  after(function() {
+    // TODO
+  });
+
+});

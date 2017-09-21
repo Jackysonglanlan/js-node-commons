@@ -56,7 +56,7 @@ function _enableExt() {
       try {
         require(fullFilePath);
       } catch (e) {
-        elog(e);
+        // elog(e);
         // never mind: require 失败是因为某些库没有装，如果项目选择使用这些库，则不会报错
       }
     }
@@ -75,6 +75,12 @@ function _enableUtils() {
   });
 }
 _enableUtils();
+
+//////////// public ////////////
+
+commons.assignEnhancedRequireToGlobal = globalParamName => {
+  global[globalParamName] = js_require;
+};
 
 module.exports = commons;
 
