@@ -1,0 +1,16 @@
+{
+  "name": "js-node-commons",
+  "version": "1.0.0",
+  "description": "My common utils code for Node.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "jackysong <jackysonglanlan@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "colors": "1.1.2",
+    "pretty-error": "2.1.1",
+    "tracer": "0.8.11"
+  }
+}
