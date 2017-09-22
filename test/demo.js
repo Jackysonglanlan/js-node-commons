@@ -7,3 +7,9 @@ arr.jsClean();
 log(arr);
 
 log(commons.utils.bits.bitCount(123));
+
+// throw new Error('ssss');
+
+// Promise.reject(123);
+
+log(__dirname);

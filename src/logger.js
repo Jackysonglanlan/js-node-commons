@@ -42,6 +42,9 @@ const NONE_LOGGER = () => {};
 // global.debug = noneLogger;
 
 function _isInEnv(envName) {
+  if (envName.toLowerCase().includes('dev') && !process.env.NODE_ENV) {
+    return true;
+  }
   return process.env.NODE_ENV && process.env.NODE_ENV.toLowerCase().includes(envName);
 }
 

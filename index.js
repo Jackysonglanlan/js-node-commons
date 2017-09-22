@@ -4,21 +4,26 @@
 
 const path = require('path');
 
-const js_require = require('./src/js-enhanced-require');
-
-const files = js_require('src/utils/files.js');
+const files = require('./src/utils/files.js');
 
 function commons() {}
 commons.utils = {};
 
-function _mountToGlobal() {
-  /* 3rd party */
-  // global.Promise = require('bluebird');
-  // global.HashTable = require('hashtable');
-  // global._ = require('lodash');
+function _autoEnable() {
+  files.doWithFilesInDir(__dirname + '/src/auto-enabled', {
+    filter: fullFilePath => {
+      return fullFilePath.endsWith('.js');
+    },
+    block: fullFilePath => {
+      require(fullFilePath);
+    }
+  });
+}
+_autoEnable();
 
+function _mountToGlobal() {
   /* logger */
-  js_require('src/logger').useGlobal({
+  require(__dirname + '/src/logger').useGlobal({
     // forConsole can specify multi config
     forConsole: [
       {
@@ -37,6 +42,15 @@ function _mountToGlobal() {
     },
     forError: 'elog'
   });
+
+  /* 3rd party */
+  try {
+    global.Promise = require('bluebird');
+    global.NMap = require('es6-native-map');
+    global._ = require('lodash');
+  } catch (e) {
+    // never mind: require 失败是因为库没有装，如果项目选择使用这些库，则不会报错
+  }
 }
 _mountToGlobal();
 
@@ -48,7 +62,7 @@ function _enable3rdParty() {
 _enable3rdParty();
 
 function _enableExt() {
-  files.doWithFilesInDir('src/ext/', {
+  files.doWithFilesInDir(__dirname + '/src/ext/', {
     filter: fullFilePath => {
       return fullFilePath.endsWith('.js');
     },
@@ -65,7 +79,7 @@ function _enableExt() {
 _enableExt();
 
 function _enableUtils() {
-  files.doWithFilesInDir('src/utils/', {
+  files.doWithFilesInDir(__dirname + '/src/utils/', {
     filter: fullFilePath => {
       return fullFilePath.endsWith('.js');
     },
@@ -79,7 +93,7 @@ _enableUtils();
 //////////// public ////////////
 
 commons.assignEnhancedRequireToGlobal = globalParamName => {
-  global[globalParamName] = js_require;
+  global[globalParamName] = require('./src/js-enhanced-require.js');
 };
 
 module.exports = commons;

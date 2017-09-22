@@ -11,7 +11,7 @@ describe('{{ className }} - {{ classFilePath }}: ', function() {
   let sandbox;
 
   before(function() {
-    // TODO
+    //
   });
 
   beforeEach(function() {
@@ -27,7 +27,7 @@ describe('{{ className }} - {{ classFilePath }}: ', function() {
 {% for method in methodList %}
   describe('{{ method }}', function() {
     it('should TODO', function() {
-      // TODO
+      //
     });
 
 
@@ -40,7 +40,7 @@ describe('{{ className }} - {{ classFilePath }}: ', function() {
   });
 
   after(function() {
-    // TODO
+    //
   });
 
 });
