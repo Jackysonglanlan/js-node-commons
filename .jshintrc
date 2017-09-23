@@ -40,7 +40,7 @@
   "varstmt": false, // true: Disallow any var statements. Only `let` and `const` are allowed.
 
   // Relaxing
-  "asi": true, // true: Tolerate Automatic Semicolon Insertion (no semicolons)
+  "asi": false, // true: Tolerate Automatic Semicolon Insertion (no semicolons)
   "boss": false, // true: Tolerate assignments where comparisons would be expected
   "debug": false, // true: Allow debugger statements e.g. browser breakpoints.
   "eqnull": false, // true: Tolerate use of `== null`
@@ -91,18 +91,14 @@
 
   // Custom Globals
   "globals": {
-    "Debugger": true,
-    "Helper": true,
     "async": true,
     "EventEmitter": true,
     "HashTable": true,
     "Promise": true,
-    "util": true,
     "_": true,
     "moment": true,
     "strman": true,
 
-    "logger": true,
     "log": true,
     "logw": true,
     "flog": true,

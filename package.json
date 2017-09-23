@@ -3,7 +3,11 @@
   "version": "1.0.0",
   "description": "My common utils code for Node.js",
   "main": "index.js",
+  "// npm script '_run_demo' need at least Node 8.0 and Chrome 60+ to inspect": "",
   "scripts": {
+    "_run_demo": "rm -f logs/*.log && rm -f logs/error/*.log && rm -f *.heapsnapshot && NODE_ENV=dev node",
+    "test-demo": "npm run _run_demo -- test/demo.js",
+    "test-demo-leak": "npm run _run_demo -- --trace_gc --max-old-space-size=200 test/demo-memory-leak-to-crash.js",
     "test-gene-from": "node test/generator/index.js",
     "test": "mocha 'test/**/tests-*.js'",
     "test-only": "mocha "
@@ -11,23 +15,25 @@
   "author": "jackysong <jackysonglanlan@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "colors": "1.1.2",
+    "gc-stats": "1.0.2",
+    "heapdump": "0.3.9",
     "pretty-error": "2.1.1",
     "tracer": "0.8.11"
   },
   "devDependencies": {
-    "nodemon": "1.12.1",
     "chai": "3.5.0",
     "chai-as-promised": "6.0.0",
     "chai-deep-match": "1.0.2",
     "chance": "1.0.6",
     "co-mocha": "1.2.0",
-    "should": "11.2.0",
-    "sinon": "2.1.0",
+    "mocha": "3.2.0",
+    "node-inspect": "1.11.2",
+    "nodemon": "1.12.1",
     "nunjucks": "3.0.0",
-    "mocha": "3.2.0"
+    "pm2": "2.7.1",
+    "should": "11.2.0",
+    "sinon": "2.1.0"
   },
-
   "repository": {
     "type": "git",
     "url": "https://github.com/Jackysonglanlan/js-node-commons.git"

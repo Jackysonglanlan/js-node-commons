@@ -9,18 +9,6 @@ const files = require('./src/utils/files.js');
 function commons() {}
 commons.utils = {};
 
-function _autoEnable() {
-  files.doWithFilesInDir(__dirname + '/src/auto-enabled', {
-    filter: fullFilePath => {
-      return fullFilePath.endsWith('.js');
-    },
-    block: fullFilePath => {
-      require(fullFilePath);
-    }
-  });
-}
-_autoEnable();
-
 function _mountToGlobal() {
   /* logger */
   require(__dirname + '/src/logger').useGlobal({
@@ -53,6 +41,18 @@ function _mountToGlobal() {
   }
 }
 _mountToGlobal();
+
+function _autoEnable() {
+  files.doWithFilesInDir(__dirname + '/src/auto-enabled', {
+    filter: fullFilePath => {
+      return fullFilePath.endsWith('.js');
+    },
+    block: fullFilePath => {
+      require(fullFilePath);
+    }
+  });
+}
+_autoEnable();
 
 function _enable3rdParty() {
   /* ours */

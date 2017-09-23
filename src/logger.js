@@ -2,6 +2,7 @@
 
 const tracer = require('tracer');
 const PrettyError = require('pretty-error');
+const fs = require('fs');
 
 const format = [
   '{{timestamp}} [{{title}}] ({{file}}:{{line}}) {{message}}',
@@ -12,7 +13,7 @@ const format = [
 
 const fileLogger = tracer.dailyfile({
   root: 'logs',
-  maxLogFiles: 30,
+  maxLogFiles: 60,
   format: format,
   dateformat: 'yyyy-mm-dd HH:MM:ss.L'
 });
@@ -28,6 +29,12 @@ const colors = require('colors');
 const consoleLogger = tracer.colorConsole({
   format: format,
   dateformat: 'yyyy-mm-dd HH:MM:ss.L',
+  inspectOpt: {
+    showHidden: false, //the object's non-enumerable properties will be shown too
+    depth: 2 //tells inspect how many times to recurse while formatting the object.
+    // This is useful for inspecting large complicated objects. Defaults to 2.
+    // To make it recurse indefinitely pass null.
+  },
   filters: {
     log: [colors.green, colors.italic],
     trace: [colors.magenta, colors.italic],
@@ -42,7 +49,7 @@ const NONE_LOGGER = () => {};
 // global.debug = noneLogger;
 
 function _isInEnv(envName) {
-  if (envName.toLowerCase().includes('dev') && !process.env.NODE_ENV) {
+  if (envName.toLowerCase().includes('dev') && !!!process.env.NODE_ENV) {
     return true;
   }
   return process.env.NODE_ENV && process.env.NODE_ENV.toLowerCase().includes(envName);
