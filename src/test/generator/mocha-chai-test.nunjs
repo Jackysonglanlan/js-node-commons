@@ -1,8 +1,8 @@
 {% set className = classFilePath | class_name %}
 'use strict';
 
-// run test:
-// npm run test-only -- test/{{ classFilePath | test_file_name }}
+// Run test:
+// ./node_modules/.bin/mocha test/{{ classFilePath | test_file_name }}
 
 const {{ className }} = js_require('{{classFilePath}}');
 

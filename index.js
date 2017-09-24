@@ -19,7 +19,7 @@ function _mountToGlobal() {
         level: 'log'
       },
       {
-        name: 'logw',
+        name: 'wlog',
         level: 'warn'
       }
     ],

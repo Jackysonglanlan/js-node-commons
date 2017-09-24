@@ -100,10 +100,9 @@
     "strman": true,
 
     "log": true,
-    "logw": true,
+    "wlog": true,
     "flog": true,
     "elog": true,
-    "dlog": true,
 
     "js_require": true,
 

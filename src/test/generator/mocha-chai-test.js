@@ -9,11 +9,11 @@
 
 process.env.NODE_ENV = 'dev';
 
-const commons = require('../../index.js');
+const commons = require('../../../index.js');
 commons.assignEnhancedRequireToGlobal('js_require');
 
 const nunjucks = require('nunjucks');
-const env = nunjucks.configure('test/generator');
+const env = nunjucks.configure(__dirname);
 const path = require('path');
 
 function _capitalize(str) {
@@ -34,7 +34,7 @@ env.addFilter('class_name', function(classFilePath) {
     .join('');
 });
 
-const mochaTemplate = env.getTemplate('mocha-tests.nunjs', true);
+const mochaTemplate = env.getTemplate('mocha-chai-test.nunjs', true);
 
 function _getMethodListOfObj(obj) {
   if (typeof obj === 'function') {
@@ -53,7 +53,6 @@ function _geneTestCodeFromFile(filePath) {
   });
 }
 
-const filePathNeedGeneTest = process.argv[2]; // the param should be target file's path relative to src/
 const fs = require('fs');
 const cp = require('child_process');
 
@@ -62,30 +61,27 @@ function geneMochaTestFileToPath(testTargetFilePath) {
     testTargetFilePath += '.js';
   }
 
+  // put all test files in 'test' dir
   const targetDir = `test/${path.dirname(testTargetFilePath)}`;
-  cp.exec(`mkdir -p ${targetDir}`, {}, err => {
-    if (err) {
-      log(err);
-      process.exit(1);
-    }
 
-    let testFilePath = `${targetDir}/tests-${path.basename(testTargetFilePath)}`;
+  cp.execSync(`mkdir -p ${targetDir}`, {});
 
-    if (fs.existsSync(testFilePath)) {
-      log(`ABORT: Test file ${testFilePath} already exists.`);
-      process.exit(0);
-    }
-
-    const codeContent = _geneTestCodeFromFile(testTargetFilePath);
-
-    fs.writeFileSync(testFilePath, codeContent, {
-      flag: 'w+'
-    });
-    log(`SUCCESS: Generate test file ${testFilePath}`);
+  const testFilePath = `${targetDir}/tests-${path.basename(testTargetFilePath)}`;
+  if (fs.existsSync(testFilePath)) {
+    wlog(`[ABORT]: Test file ${testFilePath} already exists.`);
     process.exit(0);
+  }
+
+  const codeContent = _geneTestCodeFromFile(testTargetFilePath);
+
+  fs.writeFileSync(testFilePath, codeContent, {
+    flag: 'w+'
   });
+  log(`[SUCCESS] Generate unit test file: ${testFilePath}`);
+  process.exit(0);
 }
 
-geneMochaTestFileToPath(filePathNeedGeneTest);
-
+module.exports = {
+  geneMochaTestFileToPath
+};
 //

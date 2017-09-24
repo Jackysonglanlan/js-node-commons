@@ -1,6 +1,6 @@
 'use strict';
 
-const commons = require('../index');
+const commons = require('../../index');
 
 const arr = [1, 2, 3];
 log(arr);
@@ -19,6 +19,6 @@ const server = http.createServer((req, res) => {
 });
 server.listen(8000);
 
-// setTimeout(function() {
-//   throw new Error('ssss');
-// }, 1000);
+setTimeout(function() {
+  throw new Error('ssss');
+}, 100);

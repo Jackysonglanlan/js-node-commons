@@ -1,6 +1,6 @@
 'use strict';
 
-require('../index');
+require('../../index');
 
 const leak = [];
 setInterval(function foo() {
