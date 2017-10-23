@@ -7,8 +7,6 @@ logs/
 
 # tmp
 tmp/*
-!tmp/upload
-tmp/upload/*
 
 # Runtime data
 pids
