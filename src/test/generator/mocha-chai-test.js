@@ -7,6 +7,8 @@
 
 'use strict';
 
+const assert = require('assert');
+
 process.env.NODE_ENV = 'dev';
 
 const commons = require('../../../index.js');
@@ -57,6 +59,8 @@ const fs = require('fs');
 const cp = require('child_process');
 
 function geneMochaTestFileToPath(testTargetFilePath) {
+  assert(testTargetFilePath, 'Missing param: testTargetFilePath');
+
   if (!testTargetFilePath.endsWith('.js')) {
     testTargetFilePath += '.js';
   }
